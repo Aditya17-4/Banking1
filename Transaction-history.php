@@ -117,7 +117,7 @@
 
               ?>
 
-                <tr style="color: black;">
+                <tr style="color: black;text-align: center;">
                   <td class="py-2"><?php echo $rows['sno']; ?></td>
                   <td class="py-2"><?php echo $rows['sender']; ?></td>
                   <td class="py-2"><?php echo $rows['receiver']; ?></td>
