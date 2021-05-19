@@ -75,13 +75,26 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "Banking",
+      "url": "index.php",
+      "logo": "images/bank-getty.jpg"
+    }
+  </script>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="Transaction-history.css" media="screen">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transaction</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/table.css">
   <link rel="stylesheet" type="text/css" href="css/navbar.css">
-
   <style type="text/css">
     button {
       border: none;
@@ -96,76 +109,80 @@ if (isset($_POST['submit'])) {
   </style>
 </head>
 
-<body style="background-color : #fff ;">
-
-  <div class="container">
-    <h2 class="text-center pt-4" style="color : black;">Transaction</h2>
-    <?php
-    include 'config.php';
-    $sid = $_GET['id'];
-    $sql = "SELECT * FROM  users where id=$sid";
-    $result = mysqli_query($conn, $sql);
-    if (!$result) {
-      echo "Error : " . $sql . "<br>" . mysqli_error($conn);
-    }
-    $rows = mysqli_fetch_assoc($result);
-    ?>
-    <form method="post" name="tcredit" class="tabletext"><br>
-      <div>
-        <table class="table table-striped table-condensed table-bordered">
-          <tr style="color : black;">
-            <th class="text-center">Id</th>
-            <th class="text-center">Name</th>
-            <th class="text-center">Email</th>
-            <th class="text-center">Balance</th>
-          </tr>
-          <tr style="color : black;">
-            <td class="py-2"><?php echo $rows['id'] ?></td>
-            <td class="py-2"><?php echo $rows['name'] ?></td>
-            <td class="py-2"><?php echo $rows['email'] ?></td>
-            <td class="py-2"><?php echo $rows['balance'] ?></td>
-          </tr>
-        </table>
-      </div>
-      <br><br><br>
-      <label style="color : black;"><b>Transfer To:</b></label>
-      <select name="to" class="form-control" required>
-        <option value="" disabled selected>Choose</option>
-        <?php
-        include 'config.php';
-        $sid = $_GET['id'];
-        $sql = "SELECT * FROM users where id!=$sid";
-        $result = mysqli_query($conn, $sql);
-        if (!$result) {
-          echo "Error " . $sql . "<br>" . mysqli_error($conn);
-        }
-        while ($rows = mysqli_fetch_assoc($result)) {
-        ?>
-          <option class="table" value="<?php echo $rows['id']; ?>">
-
-            <?php echo $rows['name']; ?> (Balance:
-            <?php echo $rows['balance']; ?> )
-
-          </option>
-        <?php
-        }
-        ?>
+<body class="u-body">
+  <section class="u-clearfix u-gradient u-section-1" id="sec-d7fe">
+    <div class="container">
+      <h2 class="text-center pt-4" style="color : black;">Transaction</h2>
+      <?php
+      include 'config.php';
+      $sid = $_GET['id'];
+      $sql = "SELECT * FROM  users where id=$sid";
+      $result = mysqli_query($conn, $sql);
+      if (!$result) {
+        echo "Error : " . $sql . "<br>" . mysqli_error($conn);
+      }
+      $rows = mysqli_fetch_assoc($result);
+      ?>
+      <form method="post" name="tcredit" class="tabletext"><br>
         <div>
-      </select>
-      <br>
-      <br>
-      <label style="color : black;"><b>Amount:</b></label>
-      <input type="number" class="form-control" name="amount" required>
-      <br><br>
-      <div class="text-center">
-        <button class="btn mt-3" name="submit" type="submit" id="myBtn">Transfer</button>
-      </div>
-    </form>
-  </div>
+          <table class="table table-striped table-condensed table-bordered">
+            <tr style="color : black;">
+              <th class="text-center">Id</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Email</th>
+              <th class="text-center">Balance</th>
+            </tr>
+            <tr style="color : black;">
+              <td class="py-2"><?php echo $rows['id'] ?></td>
+              <td class="py-2"><?php echo $rows['name'] ?></td>
+              <td class="py-2"><?php echo $rows['email'] ?></td>
+              <td class="py-2"><?php echo $rows['balance'] ?></td>
+            </tr>
+          </table>
+        </div>
+        <br><br><br>
+        <label style="color : black;"><b>Transfer To:</b></label>
+        <select name="to" class="form-control" required>
+          <option value="" disabled selected>Choose</option>
+          <?php
+          include 'config.php';
+          $sid = $_GET['id'];
+          $sql = "SELECT * FROM users where id!=$sid";
+          $result = mysqli_query($conn, $sql);
+          if (!$result) {
+            echo "Error " . $sql . "<br>" . mysqli_error($conn);
+          }
+          while ($rows = mysqli_fetch_assoc($result)) {
+          ?>
+            <option class="table" value="<?php echo $rows['id']; ?>">
 
+              <?php echo $rows['name']; ?> (Balance:
+              <?php echo $rows['balance']; ?> )
 
-  <footer class="text-center mt-5 py-2">
+            </option>
+          <?php
+          }
+          ?>
+          <div>
+        </select>
+        <br>
+        <br>
+        <label style="color : black;"><b>Amount:</b></label>
+        <input type="number" class="form-control" name="amount" required>
+        <br><br>
+        <div class="text-center">
+          <button class="btn mt-3" name="submit" type="submit" id="myBtn">Transfer</button>
+        </div>
+      </form>
+    </div>
+    <br>
+    <br>
+  </section>
 
+  <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-2291">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <p class="u-small-text u-text u-text-variant u-text-1">Sparks foundation &copy Aditya 2021</p>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>

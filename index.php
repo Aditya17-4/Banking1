@@ -90,7 +90,7 @@
   </header>
   <section class="u-clearfix u-gradient u-section-1" id="sec-ba89">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <h1 class="u-align-center u-text u-text-body-alt-color u-text-1">ADBI BANK</h1>
+      <h1 class="u-align-center u-text u-text-body-alt-color u-text-1">BANK</h1>
       <div class="u-clearfix u-expanded-width u-gutter-50 u-layout-wrap u-layout-wrap-1">
         <div class="u-layout">
           <div class="u-layout-row">
