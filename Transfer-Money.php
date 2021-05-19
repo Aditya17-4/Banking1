@@ -4,19 +4,18 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
   <title>Transfer Money</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="Transfer-Money.css" media="screen">
+  <link rel="stylesheet" href="Transaction-history.css" media="screen">
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.14.0, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -26,15 +25,14 @@
       "logo": "images/bank-getty.jpg"
     }
   </script>
-
+  <meta property="og:title" content="Transaction history">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#478ac9">
+  <link rel="canonical" href="index.php">
+  <meta property="og:url" content="index.php">
 </head>
 
 <body class="u-body">
-  <?php
-  include 'config.php';
-  $sql = "SELECT * FROM users";
-  $result = mysqli_query($conn, $sql);
-  ?>
   <header class="u-clearfix u-gradient u-header u-header" id="sec-1c97">
     <div class="u-clearfix u-sheet u-sheet-1">
       <a href="Home.php" class="u-image u-logo u-image-1" data-image-width="1200" data-image-height="900">
@@ -90,43 +88,61 @@
       </nav>
     </div>
   </header>
-  <section class="u-clearfix u-gradient u-section-1" id="sec-c79c">
-    <center>
-      <h4>Transfer Money</h4>
-    </center>
-    <center>
-      <div class="u-clearfix u-sheet u-sheet-1 ">
-        <div class="table-responsive-sm">
-          <table class="table table-hover table-sm table-striped table-condensed table-bordered" style="border-color:black;">
-            <thead style=" color : black;">
-              <tr>
-                <th style=" padding:10px" scope="col" class="text-center py-2">Id</th>
-                <th scope="col" class="text-center py-2">Name</th>
-                <th scope="col" class="text-center py-2">E-Mail</th>
-                <th scope="col" class="text-center py-2">Balance</th>
-                <th scope="col" class="text-center py-2">Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              while ($rows = mysqli_fetch_assoc($result)) {
-              ?>
-                <tr style="color : black;">
-                  <td class="py-2"><?php echo $rows['id'] ?></td>
-                  <td class="py-2"><?php echo $rows['name'] ?></td>
-                  <td class="py-2"><?php echo $rows['email'] ?></td>
-                  <td class="py-2"><?php echo $rows['balance'] ?></td>
-                  <td><a href="user.php?id= <?php echo $rows['id']; ?>"> <button type="button" class="btn" style="background-color:aquamarine;">Transfer</button></a></td>
-                </tr>
-              <?php
-              }
-              ?>
+  <section class="u-clearfix u-gradient u-section-1" id="sec-d7fe">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="container">
+        <?php
+        include 'config.php';
+        $sql = "SELECT * FROM users";
+        $result = mysqli_query($conn, $sql);
+        ?>
 
-            </tbody>
-          </table>
+        <div class="container">
+          <h2 class="text-center pt-4" style="color : black;">Transfer Money</h2>
+          <br>
+          <div class="row">
+            <div class="col">
+              <div class="table-responsive-sm">
+                <table class="table table-hover table-sm table-striped table-condensed table-bordered" style="border-color:black;;text-align:center;">
+                  <thead style=" color : black;">
+                    <tr>
+                      <th scope="col" class="text-center py-2">Id</th>
+                      <th scope="col" class="text-center py-2">Name</th>
+                      <th scope="col" class="text-center py-2">E-Mail</th>
+                      <th scope="col" class="text-center py-2">Balance</th>
+                      <th scope="col" class="text-center py-2">Operation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    while ($rows = mysqli_fetch_assoc($result)) {
+                    ?>
+                      <tr style="color : black;">
+                        <td class="py-2"><?php echo $rows['id'] ?></td>
+                        <td class="py-2"><?php echo $rows['name'] ?></td>
+                        <td class="py-2"><?php echo $rows['email'] ?></td>
+                        <td class="py-2"><?php echo $rows['balance'] ?></td>
+                        <td><a href="user.php?id= <?php echo $rows['id']; ?>"> <button type="button" class="btn" style="background-color:aquamarine;">Transfer</button></a></td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+
+
       </div>
-    </center>
+
+
+    </div>
+    <br>
+    <br>
+    <br>
   </section>
 
 
